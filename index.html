@@ -3,6 +3,7 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
     <style type="text/css">
         @font-face {
             font-family: alarmClock;
@@ -211,13 +212,14 @@
 
     <div id="infos">
         <h2 id="infoCaption">Informationen:</h2>
-        <div id="infoContent"><pre>Blindtext
+        <textarea id="infoContent" oninput="this.editor.update()">Blindtext
 
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 
                        Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
 
-Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer </pre></div>
+Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+        </textarea>
 
 
 
@@ -226,12 +228,31 @@ Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim just
 
     <div id="toggleSettings" onclick="$('.overlay').slideToggle('slow');$('#settings').parent().slideToggle('slow')">Settings</div>
 
-
-
-
+    <div id="infoFormatted">
+sddsfsfd
+    </div>
 
 
     <script>
+        var exports = {};
+    </script>
+    <script src="lib/markdown.js"></script>
+
+    <script>
+
+        // https://github.com/evilstreak/markdown-js
+        function Editor(input, preview) {
+            this.update = function () {
+                preview.innerHTML = exports.toHTML(input.value);
+            };
+            input.editor = this;
+            this.update();
+        }
+
+        new Editor($("#infoContent")[0], $("#infoFormatted")[0]);
+
+
+
         var startMillis;
         var running = false;
 
