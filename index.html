@@ -4,23 +4,32 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <style type="text/css">
+        @font-face {
+            font-family: alarmClock;
+            src: url('ressource/alarmclock.ttf');
+        }
+        
         * {
             padding: 0;
             margin: 0;
+            font-family: sans-serif;
         }
         
-        div{
+        div {
             border: 2px solid black;
             margin: 5px;
             padding: 1vh;
             border-radius: 5px;
         }
         
-        body > div{
+        body>div {
             border: 4px solid black;
         }
         
-        h1,h2,span,input,
+        h1,
+        h2,
+        span,
+        input,
         button {
             padding: 2px;
         }
@@ -33,179 +42,142 @@
         
         #timerSize,
         #toiletSize {
-
             display: inline-block;
+            background-color: white;
         }
         
         body {
             text-align: center;
         }
         
-        #timers{
+        #timers {
             display: inline-block;
+        }
+        
+        #timerMain,
+        #timerRead {
+            font-family: alarmClock;
         }
         
         #settings {
-            background-color: white;
             display: inline-block;
-
-            bottom: 0;
-            z-index: 3;
+            vertical-align: middle;
+            z-index: 2;
+            margin: 200px 0 0 0;
         }
         
-        #settingsTable{
-            display:inline-block;
+        #settingsTable {
+            background-color: green;
+            background-color: rgba(100%, 100%, 100%, 1);
+            display: inline-block;
         }
         
-        #toggleSettings{
+        #toggleSettings {
             position: fixed;
             top: 5px;
             right: 5px;
+            z-index: 6;
         }
         
-        #infos{
-            
+        #infos {
             width: 80%;
             margin: 1vh auto;
             text-align: left;
             display: inline-block;
         }
         
-        #infoCaption{
+        #infoCaption {
             margin: 5px;
         }
         
-        #toilet{
-        display: inline-block;
+        #toilet {
+            display: inline-block;
         }
-        /*body {*/
-        /*    */
-        /*}*/
-        /*td input {*/
-        /*    width: 50px;*/
-        /*}*/
-        /*td {*/
-        /*    padding: 0px 5px;*/
-        /*}*/
-        /*#timers {*/
-        /*    float: left;*/
-        /*    padding: 10px 20px;*/
-        /*    border: 3px solid black;*/
-        /*    border-radius: 6px;*/
-        /*}*/
-        /*#timerMain {*/
-        /*    font-size: 40px;*/
-        /*}*/
-        /*#timerRead {*/
-        /*    font-size: 25px;*/
-        /*}*/
-        /*#toilet {*/
-        /*    float: right;*/
-        /*    border: 1px solid black;*/
-        /*    padding: 10px;*/
-        /*}*/
-        /*#settings {*/
-        /*    position: absolute;*/
-        /*    bottom: 1vh;*/
-        /*    left: 1vw;*/
-        /*}*/
-        /*#timerControls {*/
-        /*    float: left;*/
-        /*    margin: 0 40px;*/
-        /*}*/
-        /*#timerControls button {*/
-        /*    width: 80px;*/
-        /*}*/
-        /*table {*/
-        /*    float: left;*/
-        /*}*/
-        /*#timerSize {*/
-        /*    float: left;*/
-        /*    margin: 0 40px;*/
-        /*}*/
-        /*#toiletSize {*/
-        /*    float: left;*/
-        /*    margin: 0 40px;*/
-        /*}*/
-        /*#toiletLabel {*/
-        /*    text-align: center;*/
-        /*}*/
-        /*#toiletToggle {*/
-        /*    text-align: right;*/
-        /*    display: block;*/
-        /*}*/
-        /*#timerRead {*/
-        /*    margin: 0 0 10px 0;*/
-        /*}*/
-        /*#readLabel {*/
-        /*    font-size: 1.5em;*/
-        /*}*/
-        /*h4 {*/
-        /*    margin: 5px;*/
-        /*}*/
-        /*#addTimePane {*/
-        /*    padding: 5px;*/
-        /*    border: 1px solid black;*/
-        /*    display: inline-block;*/
-        /*    position: absolute;*/
-        /*    background-color: white;*/
-        /*}*/
-        /*#addTimePane input {*/
-        /*    width: 50px;*/
-        /*}*/
+        
+        .toiletFree {
+            border-color: #31B404;
+            color: #31B404;
+            background-color: #E0F8E0;
+        }
+        
+        .toiletOccupied {
+            border-color: #FE2E2E;
+            color: #FE2E2E;
+            background-color: #F6CECE;
+        }
+        
+        .overlay {
+            background-color: rgba(100%, 100%, 100%, 0.8);
+            z-index: 2;
+        }
+        
+        .wholePage {
+            margin: 0;
+            border: 0;
+            padding: 0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 3;
+            width: 100vw;
+            height: 100vh;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
+    <div class="overlay wholePage"></div>
+    <div class="wholePage">
+        <div id="settings">
+            <div id="settingsTable">
+                <table>
+                    <tr>
+                        <th>Show?</th>
+                        <th>Timer</th>
+                        <th>Duration</th>
+                        <td><button onclick="magicFix(false,startTimer,true)">Start</button></td>
 
-    <div id="settings">
-        <div id="settingsTable">
-        <table >
-            <tr>
-                <th>Show?</th>
-                <th>Timer</th>
-                <th>Duration</th>
-                <td><button onclick="magicFix(false,startTimer,true)">Start</button></td>
+                    </tr>
+                    <tr>
+                        <td>
 
-            </tr>
-            <tr>
-                <td>
+                        </td>
+                        <td>Main Timer</td>
+                        <td id="formMain">
+                            <input type="number" id="mainHrs" value="0" min="0">
+                            <input type="number" id="mainMin" value="0" min="0" max="60">
+                            <input type="number" id="mainSec" value="0" min="0" max="60">
+                        </td>
+                        <td><button onclick="magicFix(true,timer.stop.bind(timer),false)">Stop</button></td>
 
-                </td>
-                <td>Main Timer</td>
-                <td id="formMain">
-                    <input type="number" id="mainHrs" value="0" min="0">
-                    <input type="number" id="mainMin" value="0" min="0" max="60">
-                    <input type="number" id="mainSec" value="0" min="0" max="60">
-                </td>
-                <td><button onclick="magicFix(true,timer.stop.bind(timer),false)">Stop</button></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right">
+                            <input type="checkbox" id="readEnabled" checked="checked" onclick="toggleReadTimer()">
+                        </td>
+                        <td>Read-Timer</td>
+                        <td id="formRead">
+                            <input type="number" id="readHrs" value="0" min="0">
+                            <input type="number" id="readMin" value="0" min="0" max="60">
+                            <input type="number" id="readSec" value="0" min="0" max="60">
+                        </td>
+                        <td>
+                            <button onclick="magicFix(false,resetTimer,running)">Reset</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>Add time to both</td>
+                        <td><input type="number" id="addedHrs" value="0">
+                            <input type="number" id="addedMin" value="0" min="0" max="60">
+                            <input type="number" id="addedSec" value="0" min="0" max="60"></td>
+                        <td><button onclick="addTime()">Add Time</button></td>
+                    </tr>
+                </table>
+            </div>
 
-            </tr>
-            <tr>
-                <td style="text-align:right">
-                    <input type="checkbox" id="readEnabled" checked="checked" onclick="toggleReadTimer()">
-                </td>
-                <td>Read-Timer</td>
-                <td id="formRead">
-                    <input type="number" id="readHrs" value="0" min="0">
-                    <input type="number" id="readMin" value="0" min="0" max="60">
-                    <input type="number" id="readSec" value="0" min="0" max="60">
-                </td>
-                <td>
-                    <button onclick="magicFix(false,resetTimer,running)">Reset</button>
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Add time to both</td>
-                <td><input type="number" id="addedHrs" value="0" >
-                    <input type="number" id="addedMin" value="0" min="0" max="60">
-                    <input type="number" id="addedSec" value="0" min="0" max="60"></td>
-                <td><button onclick="addTime()">Add Time</button></td>
-            </tr>
-        </table>
-        </div>
-<br>
+            <br>
 
             <div id="timerSize">
                 <h4>Timer Font-Size</h4>
@@ -221,24 +193,25 @@
 
 
 
+        </div>
     </div>
 
-<br>
+    <br>
     <div id="timers">
         <h1 id="timerMain">00:00:00</h1>
         <h1 id="timerRead">00:00:00</h1>
         <span id="readLabel">Einlesezeit</span>
     </div><br>
 
-    <div id="toilet" onclick="toggleToilet()">
+    <div id="toilet" class="toiletFree" onclick="toggleToilet()">
         <h2 id="toiletCaption">Toilette:</h2>
         <h2 id="toiletLabel">frei</h2>
 
     </div><br>
 
     <div id="infos">
-    <h2 id="infoCaption">Informationen:</h2>
-    <div id="infoContent"><pre>Blindtext
+        <h2 id="infoCaption">Informationen:</h2>
+        <div id="infoContent"><pre>Blindtext
 
         Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 
@@ -251,7 +224,7 @@ Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim just
     </div>
 
 
-<div id="toggleSettings" onclick="$('#settings').slideToggle('slow')">Settings</div>
+    <div id="toggleSettings" onclick="$('.overlay').slideToggle('slow');$('#settings').parent().slideToggle('slow')">Settings</div>
 
 
 
@@ -259,7 +232,6 @@ Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim just
 
 
     <script>
-
         var startMillis;
         var running = false;
 
@@ -294,21 +266,21 @@ Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim just
 
 
         function startTimer() {
-            
-        if(!($("#timerMain").html()=="00:00:00")){
-            var maxDurMain = parseDuration("#timerMain")//(
-               // (parseInt($("#mainHrs").val()) * 3600) +
-                //(parseInt($("#mainMin").val()) * 60) +
-                //(parseInt($("#mainSec").val()))) * 1000;
 
-            var maxDurRead = parseDuration("#timerRead")//(
-                //(parseInt($("#readHrs").val()) * 3600) +
-                //(parseInt($("#readMin").val()) * 60) +
-                //(parseInt($("#readSec").val()))) * 1000;
-            
-            startMillis = Date.now();
-            timer.run();
-        }
+            if (!($("#timerMain").html() == "00:00:00")) {
+                var maxDurMain = parseDuration("#timerMain") //(
+                    // (parseInt($("#mainHrs").val()) * 3600) +
+                    //(parseInt($("#mainMin").val()) * 60) +
+                    //(parseInt($("#mainSec").val()))) * 1000;
+
+                var maxDurRead = parseDuration("#timerRead") //(
+                    //(parseInt($("#readHrs").val()) * 3600) +
+                    //(parseInt($("#readMin").val()) * 60) +
+                    //(parseInt($("#readSec").val()))) * 1000;
+
+                startMillis = Date.now();
+                timer.run();
+            }
         }
 
         function showAddTimePane(elem) {
@@ -326,7 +298,7 @@ Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim just
 
             startMillis += addedTime;
 
-           
+
         }
 
         function diffToTime(diff, main) {
@@ -341,14 +313,14 @@ Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim just
 
             return (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
         }
-        
-        function parseDuration(from){
+
+        function parseDuration(from) {
             var durStr = $(from).html();
             //alert(durStr);
             var durArr = durStr.split(":");
-           // alert(durArr);
-           // alert(((parseInt(durArr[0]) * 3600) +
-           //     (parseInt(durArr[1]) * 60) +
+            // alert(durArr);
+            // alert(((parseInt(durArr[0]) * 3600) +
+            //     (parseInt(durArr[1]) * 60) +
             //    (parseInt(durArr[2]))) * 1000);
             return (((parseInt(durArr[0]) * 3600) +
                 (parseInt(durArr[1]) * 60) +
@@ -400,12 +372,15 @@ Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim just
 
         function toggleToilet() {
             if ($('#toiletLabel').html() == "frei") {
-                $('#toiletLabel').html("besetzt")
+                $('#toiletLabel').html("besetzt");
+
+
             }
             else {
-                $('#toiletLabel').html("frei")
+                $('#toiletLabel').html("frei");
             }
-
+            $("#toilet").toggleClass("toiletFree toiletOccupied");
+            //alert($("toilet").attr("class"));
             return false;
         }
 
@@ -435,11 +410,16 @@ Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim just
                 running = runningStateAfter;
             }
             report += "running soll jetzt den Wert " + ((runningStateAfter) ? "true" : "false") + " haben.\n";
-            
+
             report += "running hat den Wert " + ((running) ? "true" : "false");
             //alert(report);
         }
         // Funktionen für Frontend-Design
+        
+        $(document).ready(()=>{
+            $('.overlay').slideToggle('slow');
+            $('#settings').parent().slideToggle('slow');
+        })
     </script>
 </body>
 
