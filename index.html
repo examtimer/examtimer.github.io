@@ -128,8 +128,8 @@
 </head>
 
 <body>
-<div class="overlay wholePage"></div>
-<div class="wholePage">
+<div class="overlay wholePage" style="display: none;"></div>
+<div class="wholePage" style="display: none">
     <div id="settings">
         <div id="settingsTable">
             <table>
@@ -233,7 +233,7 @@ This can parse **MarkDown**.
 </div>
 
 
-<div id="toggleSettings" onclick="$('.overlay').slideToggle('slow');$('#settings').parent().slideToggle('slow')">
+<div id="toggleSettings" onclick="toggleSettingsOverlay()">
     Settings
 </div>
 
@@ -293,6 +293,9 @@ This can parse **MarkDown**.
     function startTimer() {
 
         if (!($("#timerMain").html() == "00:00:00")) {
+            toggleSettingsOverlay();
+
+
             var maxDurMain = parseDuration("#timerMain") //(
             // (parseInt($("#mainHrs").val()) * 3600) +
             //(parseInt($("#mainMin").val()) * 60) +
@@ -305,6 +308,7 @@ This can parse **MarkDown**.
 
             startMillis = Date.now();
             timer.run();
+
         }
     }
 
@@ -316,6 +320,8 @@ This can parse **MarkDown**.
     }
 
     function addTime() {
+        toggleSettingsOverlay();
+
         addedTime = (
             (parseInt($("#addedHrs").val()) * 3600) +
             (parseInt($("#addedMin").val()) * 60) +
@@ -441,10 +447,11 @@ This can parse **MarkDown**.
     }
     // Funktionen für Frontend-Design
 
-    $(document).ready(() => {
+    function toggleSettingsOverlay() {
         $('.overlay').slideToggle('slow');
         $('#settings').parent().slideToggle('slow');
-    })
+    }
+
 </script>
 </body>
 
