@@ -9,24 +9,24 @@
             font-family: alarmClock;
             src: url('ressource/alarmclock.ttf');
         }
-        
+
         * {
             padding: 0;
             margin: 0;
             font-family: sans-serif;
         }
-        
+
         div {
             border: 2px solid black;
             margin: 5px;
             padding: 1vh;
             border-radius: 5px;
         }
-        
-        body>div {
+
+        body > div {
             border: 4px solid black;
         }
-        
+
         h1,
         h2,
         span,
@@ -34,84 +34,84 @@
         button {
             padding: 2px;
         }
-        
+
         input {
             width: 20%;
             min-width: 40px;
             max-width: 150px;
         }
-        
+
         #timerSize,
         #toiletSize {
             display: inline-block;
             background-color: white;
         }
-        
+
         body {
             text-align: center;
         }
-        
+
         #timers {
             display: inline-block;
         }
-        
+
         #timerMain,
         #timerRead {
             font-family: alarmClock;
         }
-        
+
         #settings {
             display: inline-block;
             vertical-align: middle;
             z-index: 2;
             margin: 200px 0 0 0;
         }
-        
+
         #settingsTable {
             background-color: green;
             background-color: rgba(100%, 100%, 100%, 1);
             display: inline-block;
         }
-        
+
         #toggleSettings {
             position: fixed;
             top: 5px;
             right: 5px;
             z-index: 6;
         }
-        
+
         #infos {
             width: 80%;
             margin: 1vh auto;
             text-align: left;
             display: inline-block;
         }
-        
+
         #infoCaption {
             margin: 5px;
         }
-        
+
         #toilet {
             display: inline-block;
         }
-        
+
         .toiletFree {
             border-color: #31B404;
             color: #31B404;
             background-color: #E0F8E0;
         }
-        
+
         .toiletOccupied {
             border-color: #FE2E2E;
             color: #FE2E2E;
             background-color: #F6CECE;
         }
-        
+
         .overlay {
             background-color: rgba(100%, 100%, 100%, 0.8);
             z-index: 2;
         }
-        
+
         .wholePage {
             margin: 0;
             border: 0;
@@ -128,320 +128,324 @@
 </head>
 
 <body>
-    <div class="overlay wholePage"></div>
-    <div class="wholePage">
-        <div id="settings">
-            <div id="settingsTable">
-                <table>
-                    <tr>
-                        <th>Show?</th>
-                        <th>Timer</th>
-                        <th>Duration</th>
-                        <td><button onclick="magicFix(false,startTimer,true)">Start</button></td>
+<div class="overlay wholePage"></div>
+<div class="wholePage">
+    <div id="settings">
+        <div id="settingsTable">
+            <table>
+                <tr>
+                    <th>Show?</th>
+                    <th>Timer</th>
+                    <th>Duration</th>
+                    <td>
+                        <button onclick="magicFix(false,startTimer,true)">Start</button>
+                    </td>
 
-                    </tr>
-                    <tr>
-                        <td>
+                </tr>
+                <tr>
+                    <td>
 
-                        </td>
-                        <td>Main Timer</td>
-                        <td id="formMain">
-                            <input type="number" id="mainHrs" value="0" min="0">
-                            <input type="number" id="mainMin" value="0" min="0" max="60">
-                            <input type="number" id="mainSec" value="0" min="0" max="60">
-                        </td>
-                        <td><button onclick="magicFix(true,timer.stop.bind(timer),false)">Stop</button></td>
+                    </td>
+                    <td>Main Timer</td>
+                    <td id="formMain">
+                        <input type="number" id="mainHrs" value="0" min="0">
+                        <input type="number" id="mainMin" value="0" min="0" max="60">
+                        <input type="number" id="mainSec" value="0" min="0" max="60">
+                    </td>
+                    <td>
+                        <button onclick="magicFix(true,timer.stop.bind(timer),false)">Stop</button>
+                    </td>
 
-                    </tr>
-                    <tr>
-                        <td style="text-align:right">
-                            <input type="checkbox" id="readEnabled" checked="checked" onclick="toggleReadTimer()">
-                        </td>
-                        <td>Read-Timer</td>
-                        <td id="formRead">
-                            <input type="number" id="readHrs" value="0" min="0">
-                            <input type="number" id="readMin" value="0" min="0" max="60">
-                            <input type="number" id="readSec" value="0" min="0" max="60">
-                        </td>
-                        <td>
-                            <button onclick="magicFix(false,resetTimer,running)">Reset</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Add time to both</td>
-                        <td><input type="number" id="addedHrs" value="0">
-                            <input type="number" id="addedMin" value="0" min="0" max="60">
-                            <input type="number" id="addedSec" value="0" min="0" max="60"></td>
-                        <td><button onclick="addTime()">Add Time</button></td>
-                    </tr>
-                </table>
-            </div>
-
-            <br>
-
-            <div id="timerSize">
-                <h4>Timer Font-Size</h4>
-                <button onclick="incSize('#timerMain');incSize('#timerRead')">+</button>
-                <button onclick="decSize('#timerMain');decSize('#timerRead')">-</button>
-            </div>
-
-            <div id="toiletSize">
-                <h4>Toilet Font-Size</h4>
-                <button onclick="incSize('#toiletCaption');incSize('#toiletLabel');">+</button>
-                <button onclick="decSize('#toiletCaption');decSize('#toiletLabel');">-</button>
-            </div>
-
-
-
+                </tr>
+                <tr>
+                    <td style="text-align:right">
+                        <input type="checkbox" id="readEnabled" checked="checked" onclick="toggleReadTimer()">
+                    </td>
+                    <td>Read-Timer</td>
+                    <td id="formRead">
+                        <input type="number" id="readHrs" value="0" min="0">
+                        <input type="number" id="readMin" value="0" min="0" max="60">
+                        <input type="number" id="readSec" value="0" min="0" max="60">
+                    </td>
+                    <td>
+                        <button onclick="magicFix(false,resetTimer,running)">Reset</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Add time to both</td>
+                    <td><input type="number" id="addedHrs" value="0">
+                        <input type="number" id="addedMin" value="0" min="0" max="60">
+                        <input type="number" id="addedSec" value="0" min="0" max="60"></td>
+                    <td>
+                        <button onclick="addTime()">Add Time</button>
+                    </td>
+                </tr>
+            </table>
         </div>
-    </div>
 
-    <br>
-    <div id="timers">
-        <h1 id="timerMain">00:00:00</h1>
-        <h1 id="timerRead">00:00:00</h1>
-        <span id="readLabel">Einlesezeit</span>
-    </div><br>
+        <br>
 
-    <div id="toilet" class="toiletFree" onclick="toggleToilet()">
-        <h2 id="toiletCaption">Toilette:</h2>
-        <h2 id="toiletLabel">frei</h2>
+        <div id="timerSize">
+            <h4>Timer Font-Size</h4>
+            <button onclick="incSize('#timerMain');incSize('#timerRead')">+</button>
+            <button onclick="decSize('#timerMain');decSize('#timerRead')">-</button>
+        </div>
 
-    </div><br>
+        <div id="toiletSize">
+            <h4>Toilet Font-Size</h4>
+            <button onclick="incSize('#toiletCaption');incSize('#toiletLabel');">+</button>
+            <button onclick="decSize('#toiletCaption');decSize('#toiletLabel');">-</button>
+        </div>
 
-    <div id="infos">
-        <h2 id="infoCaption">Informationen:</h2>
-        <textarea id="infoContent" oninput="this.editor.update()">Blindtext
 
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        <textarea id="infoContent" oninput="this.editor.update()" cols="60" rows="10">
+## Information
 
-                       Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+This can parse **MarkDown**.
 
-Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+[Wikipedia](https://en.wikipedia.org/wiki/Markdown)
         </textarea>
 
-
-
     </div>
+</div>
 
+<br>
+<div id="timers">
+    <h1 id="timerMain">00:00:00</h1>
+    <h1 id="timerRead">00:00:00</h1>
+    <span id="readLabel">Einlesezeit</span>
+</div>
+<br>
 
-    <div id="toggleSettings" onclick="$('.overlay').slideToggle('slow');$('#settings').parent().slideToggle('slow')">Settings</div>
+<div id="toilet" class="toiletFree" onclick="toggleToilet()">
+    <h2 id="toiletCaption">Toilette:</h2>
+    <h2 id="toiletLabel">frei</h2>
 
+</div>
+<br>
+
+<div id="infos">
+    <h2 id="infoCaption">Informationen:</h2>
     <div id="infoFormatted">
-sddsfsfd
     </div>
 
+</div>
 
-    <script>
-        var exports = {};
-    </script>
-    <script src="lib/markdown.js"></script>
 
-    <script>
+<div id="toggleSettings" onclick="$('.overlay').slideToggle('slow');$('#settings').parent().slideToggle('slow')">
+    Settings
+</div>
 
-        // https://github.com/evilstreak/markdown-js
-        function Editor(input, preview) {
-            this.update = function () {
-                preview.innerHTML = exports.toHTML(input.value);
-            };
-            input.editor = this;
-            this.update();
+
+<script>
+    var exports = {};
+</script>
+<script src="lib/markdown.js"></script>
+
+<script>
+
+    // https://github.com/evilstreak/markdown-js
+    function Editor(input, preview) {
+        this.update = function () {
+            preview.innerHTML = exports.toHTML(input.value);
+        };
+        input.editor = this;
+        this.update();
+    }
+
+    new Editor($("#infoContent")[0], $("#infoFormatted")[0]);
+
+
+    var startMillis;
+    var running = false;
+
+    var maxDurMain,
+        maxDurRead;
+
+    var timer = new interval(50, stepDown);
+
+    function stepDown() {
+        var diff = Date.now() - startMillis;
+
+        $('#timerMain').html(diffToTime(maxDurMain - diff, true));
+        $('#timerRead').html(diffToTime(maxDurRead - diff, false));
+    }
+
+
+    function resetTimer() {
+        timer.stop();
+        maxDurMain = (
+            (parseInt($("#mainHrs").val()) * 3600) +
+            (parseInt($("#mainMin").val()) * 60) +
+            (parseInt($("#mainSec").val()))) * 1000;
+
+        maxDurRead = (
+            (parseInt($("#readHrs").val()) * 3600) +
+            (parseInt($("#readMin").val()) * 60) +
+            (parseInt($("#readSec").val()))) * 1000;
+
+        $('#timerMain').html(diffToTime(maxDurMain, false));
+        $('#timerRead').html(diffToTime(maxDurRead, false));
+    }
+
+
+    function startTimer() {
+
+        if (!($("#timerMain").html() == "00:00:00")) {
+            var maxDurMain = parseDuration("#timerMain") //(
+            // (parseInt($("#mainHrs").val()) * 3600) +
+            //(parseInt($("#mainMin").val()) * 60) +
+            //(parseInt($("#mainSec").val()))) * 1000;
+
+            var maxDurRead = parseDuration("#timerRead") //(
+            //(parseInt($("#readHrs").val()) * 3600) +
+            //(parseInt($("#readMin").val()) * 60) +
+            //(parseInt($("#readSec").val()))) * 1000;
+
+            startMillis = Date.now();
+            timer.run();
+        }
+    }
+
+    function showAddTimePane(elem) {
+        var pane = $("#addTimePane");
+
+        //pane.offset($(elem).offset());
+        pane.show();
+    }
+
+    function addTime() {
+        addedTime = (
+            (parseInt($("#addedHrs").val()) * 3600) +
+            (parseInt($("#addedMin").val()) * 60) +
+            (parseInt($("#addedSec").val()))) * 1000;
+
+        startMillis += addedTime;
+
+
+    }
+
+    function diffToTime(diff, main) {
+        if (diff < 0) {
+            if (main) magicFix(true, timer.stop.bind(timer), false);
+            return "00:00:00"
         }
 
-        new Editor($("#infoContent")[0], $("#infoFormatted")[0]);
+        var hrs = Math.floor(diff / 3600000);
+        var min = Math.floor((diff % 3600000) / 60000);
+        var sec = Math.floor((diff % 60000) / 1000);
+
+        return (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+    }
+
+    function parseDuration(from) {
+        var durStr = $(from).html();
+        //alert(durStr);
+        var durArr = durStr.split(":");
+        // alert(durArr);
+        // alert(((parseInt(durArr[0]) * 3600) +
+        //     (parseInt(durArr[1]) * 60) +
+        //    (parseInt(durArr[2]))) * 1000);
+        return (((parseInt(durArr[0]) * 3600) +
+        (parseInt(durArr[1]) * 60) +
+        (parseInt(durArr[2]))) * 1000);
+    }
 
 
-
-        var startMillis;
-        var running = false;
-
-        var maxDurMain,
-            maxDurRead;
-
-        var timer = new interval(50, stepDown);
-
-        function stepDown() {
-            var diff = Date.now() - startMillis;
-
-            $('#timerMain').html(diffToTime(maxDurMain - diff, true));
-            $('#timerRead').html(diffToTime(maxDurRead - diff, false));
+    function toggleReadTimer() {
+        if (!$('#readEnabled')[0].checked) {
+            $('#timerRead').hide();
+            $('#readLabel').hide();
+        }
+        else {
+            $('#timerRead').show();
+            $('#readLabel').show();
         }
 
-
-        function resetTimer() {
-            timer.stop();
-            maxDurMain = (
-                (parseInt($("#mainHrs").val()) * 3600) +
-                (parseInt($("#mainMin").val()) * 60) +
-                (parseInt($("#mainSec").val()))) * 1000;
-
-            maxDurRead = (
-                (parseInt($("#readHrs").val()) * 3600) +
-                (parseInt($("#readMin").val()) * 60) +
-                (parseInt($("#readSec").val()))) * 1000;
-
-            $('#timerMain').html(diffToTime(maxDurMain, false));
-            $('#timerRead').html(diffToTime(maxDurRead, false));
-        }
+    }
 
 
-        function startTimer() {
+    // https://gist.github.com/manast/1185904
+    function interval(duration, fn) {
+        this.baseline = undefined;
 
-            if (!($("#timerMain").html() == "00:00:00")) {
-                var maxDurMain = parseDuration("#timerMain") //(
-                    // (parseInt($("#mainHrs").val()) * 3600) +
-                    //(parseInt($("#mainMin").val()) * 60) +
-                    //(parseInt($("#mainSec").val()))) * 1000;
-
-                var maxDurRead = parseDuration("#timerRead") //(
-                    //(parseInt($("#readHrs").val()) * 3600) +
-                    //(parseInt($("#readMin").val()) * 60) +
-                    //(parseInt($("#readSec").val()))) * 1000;
-
-                startMillis = Date.now();
-                timer.run();
+        this.run = function () {
+            if (this.baseline === undefined) {
+                this.baseline = new Date().getTime();
             }
-        }
+            fn();
+            var end = new Date().getTime();
+            this.baseline += duration;
 
-        function showAddTimePane(elem) {
-            var pane = $("#addTimePane");
-
-            //pane.offset($(elem).offset());
-            pane.show();
-        }
-
-        function addTime() {
-            addedTime = (
-                (parseInt($("#addedHrs").val()) * 3600) +
-                (parseInt($("#addedMin").val()) * 60) +
-                (parseInt($("#addedSec").val()))) * 1000;
-
-            startMillis += addedTime;
-
-
-        }
-
-        function diffToTime(diff, main) {
-            if (diff < 0) {
-                if (main) magicFix(true, timer.stop.bind(timer), false);
-                return "00:00:00"
+            var nextTick = duration - (end - this.baseline);
+            if (nextTick < 0) {
+                nextTick = 0
             }
+            (function (i) {
+                i.timer = setTimeout(function () {
+                    i.run(end)
+                }, nextTick)
+            }(this))
+        };
 
-            var hrs = Math.floor(diff / 3600000);
-            var min = Math.floor((diff % 3600000) / 60000);
-            var sec = Math.floor((diff % 60000) / 1000);
-
-            return (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+        this.stop = function () {
+            clearTimeout(this.timer)
         }
-
-        function parseDuration(from) {
-            var durStr = $(from).html();
-            //alert(durStr);
-            var durArr = durStr.split(":");
-            // alert(durArr);
-            // alert(((parseInt(durArr[0]) * 3600) +
-            //     (parseInt(durArr[1]) * 60) +
-            //    (parseInt(durArr[2]))) * 1000);
-            return (((parseInt(durArr[0]) * 3600) +
-                (parseInt(durArr[1]) * 60) +
-                (parseInt(durArr[2]))) * 1000);
-        }
+    }
 
 
-        function toggleReadTimer() {
-            if (!$('#readEnabled')[0].checked) {
-                $('#timerRead').hide();
-                $('#readLabel').hide();
-            }
-            else {
-                $('#timerRead').show();
-                $('#readLabel').show();
-            }
+    function toggleToilet() {
+        if ($('#toiletLabel').html() == "frei") {
+            $('#toiletLabel').html("besetzt");
+
 
         }
-
-
-        // https://gist.github.com/manast/1185904
-        function interval(duration, fn) {
-            this.baseline = undefined;
-
-            this.run = function() {
-                if (this.baseline === undefined) {
-                    this.baseline = new Date().getTime();
-                }
-                fn();
-                var end = new Date().getTime();
-                this.baseline += duration;
-
-                var nextTick = duration - (end - this.baseline);
-                if (nextTick < 0) {
-                    nextTick = 0
-                }
-                (function(i) {
-                    i.timer = setTimeout(function() {
-                        i.run(end)
-                    }, nextTick)
-                }(this))
-            };
-
-            this.stop = function() {
-                clearTimeout(this.timer)
-            }
+        else {
+            $('#toiletLabel').html("frei");
         }
+        $("#toilet").toggleClass("toiletFree toiletOccupied");
+        //alert($("toilet").attr("class"));
+        return false;
+    }
 
+    function incSize(elem) {
+        var fontSize = parseInt($(elem).css("font-size"));
+        fontSize = (fontSize + 5) + "px";
+        $(elem).css({
+            'font-size': fontSize
+        });
+    }
 
-        function toggleToilet() {
-            if ($('#toiletLabel').html() == "frei") {
-                $('#toiletLabel').html("besetzt");
+    function decSize(elem) {
+        var fontSize = parseInt($(elem).css("font-size"));
+        fontSize = (fontSize - 5) + "px";
+        $(elem).css({
+            'font-size': fontSize
+        });
+    }
 
-
-            }
-            else {
-                $('#toiletLabel').html("frei");
-            }
-            $("#toilet").toggleClass("toiletFree toiletOccupied");
-            //alert($("toilet").attr("class"));
-            return false;
+    //Fix, um Start, Stop und Reset zu verbessern
+    function magicFix(RunningState, callback, runningStateAfter) {
+        var report = "running ist " + ((running) ? "true." : "false.") + "\n";
+        report += "Die Funktion soll ausgeführt werden, wenn running gleich " + ((RunningState) ? "true." : "false.") + "\n";
+        if (RunningState == running) {
+            report += "Funktion wird ausgeführt.\n"
+            callback();
+            running = runningStateAfter;
         }
+        report += "running soll jetzt den Wert " + ((runningStateAfter) ? "true" : "false") + " haben.\n";
 
-        function incSize(elem) {
-            var fontSize = parseInt($(elem).css("font-size"));
-            fontSize = (fontSize + 5) + "px";
-            $(elem).css({
-                'font-size': fontSize
-            });
-        }
+        report += "running hat den Wert " + ((running) ? "true" : "false");
+        //alert(report);
+    }
+    // Funktionen für Frontend-Design
 
-        function decSize(elem) {
-            var fontSize = parseInt($(elem).css("font-size"));
-            fontSize = (fontSize - 5) + "px";
-            $(elem).css({
-                'font-size': fontSize
-            });
-        }
-
-        //Fix, um Start, Stop und Reset zu verbessern
-        function magicFix(RunningState, callback, runningStateAfter) {
-            var report = "running ist " + ((running) ? "true." : "false.") + "\n";
-            report += "Die Funktion soll ausgeführt werden, wenn running gleich " + ((RunningState) ? "true." : "false.") + "\n";
-            if (RunningState == running) {
-                report += "Funktion wird ausgeführt.\n"
-                callback();
-                running = runningStateAfter;
-            }
-            report += "running soll jetzt den Wert " + ((runningStateAfter) ? "true" : "false") + " haben.\n";
-
-            report += "running hat den Wert " + ((running) ? "true" : "false");
-            //alert(report);
-        }
-        // Funktionen für Frontend-Design
-        
-        $(document).ready(()=>{
-            $('.overlay').slideToggle('slow');
-            $('#settings').parent().slideToggle('slow');
-        })
-    </script>
+    $(document).ready(() => {
+        $('.overlay').slideToggle('slow');
+        $('#settings').parent().slideToggle('slow');
+    })
+</script>
 </body>
 
 </html>
