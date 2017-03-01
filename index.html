@@ -1,334 +1,442 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <style type="text/css">
-        body {
-            padding: 1vw 1vh;
+        * {
+            padding: 0;
+            margin: 0;
         }
-
-        td input {
-            width: 50px;
+        
+        div{
+            border: 2px solid black;
+            margin: 5px;
+            padding: 1vh;
+            border-radius: 5px;
         }
-
-        td {
-            padding: 0px 5px;
+        
+        h1,h2,span,input,
+        button {
+            padding: 2px;
         }
-
-        #timers {
-            float: left;
-			padding:10px 20px;
-			border: 3px solid black;
-			border-radius: 6px;
+        
+        input {
+            width: 20%;
+            min-width: 40px;
+            max-width: 150px;
         }
-
-	#timerMain {
-		font-size: 40px;
-		}
-	
-	#timerRead {
-		font-size: 25px;
-		}
-
-        #toilet {
-            float: right;
-            border: 1px solid black;
-            padding: 10px;
-        }
-
-        #settings {
-            position: absolute;
-            bottom: 1vh;
-            left: 1vw;
-visibility: hidden;
-        }
-<!-- ToDo: Fix.....>
-#settingsWrapper:hover #settings {
-visibility: visible;
-}
-
-        #timerControls {
-            float: left;
-            margin: 0 40px;
-        }
-
-        #timerControls button {
-            width: 80px;
-        }
-
-        table {
-            float: left;
-        }
-
-        #timerSize {
-            float: left;
-            margin: 0 40px;
-        }
-
+        
+        #timerSize,
         #toiletSize {
-            float: left;
-            margin: 0 40px;
-        }
 
-        #toiletLabel {
+            display: inline-block;
+        }
+        
+        body {
             text-align: center;
         }
-
-        #toiletToggle {
-            text-align: right;
-            display: block;
+        
+        #timers{
+            display: inline-block;
         }
-
-
-
-        #timerRead {
-            margin: 0 0 10px 0;
+        
+        #settings {
+            background-color: white;
+            display: inline-block;
+            width:90%;
+            bottom: 0;
+            z-index: 3;
         }
-
-        #readLabel {
-            font-size: 1.5em;
+        
+        #settingsTable{
+            display:inline-block;
         }
-
-
-
-        h4 {
+        
+        #toggleSettings{
+            position: fixed;
+            top: 5px;
+            right: 5px;
+        }
+        
+        #infos{
+            
+            width: 80%;
+            margin: 1vh auto;
+            text-align: left;
+            display: inline-block;
+        }
+        
+        #infoCaption{
             margin: 5px;
         }
-
-        #addTimePane {
-            padding: 5px;
-            border: 1px solid black;
-            display: inline-block;
-            position: absolute;
-            background-color: white;
+        
+        #toilet{
+        display: inline-block;
         }
-
-        #addTimePane input {
-            width: 50px;
-        }
-
-
-
+        /*body {*/
+        /*    */
+        /*}*/
+        /*td input {*/
+        /*    width: 50px;*/
+        /*}*/
+        /*td {*/
+        /*    padding: 0px 5px;*/
+        /*}*/
+        /*#timers {*/
+        /*    float: left;*/
+        /*    padding: 10px 20px;*/
+        /*    border: 3px solid black;*/
+        /*    border-radius: 6px;*/
+        /*}*/
+        /*#timerMain {*/
+        /*    font-size: 40px;*/
+        /*}*/
+        /*#timerRead {*/
+        /*    font-size: 25px;*/
+        /*}*/
+        /*#toilet {*/
+        /*    float: right;*/
+        /*    border: 1px solid black;*/
+        /*    padding: 10px;*/
+        /*}*/
+        /*#settings {*/
+        /*    position: absolute;*/
+        /*    bottom: 1vh;*/
+        /*    left: 1vw;*/
+        /*}*/
+        /*#timerControls {*/
+        /*    float: left;*/
+        /*    margin: 0 40px;*/
+        /*}*/
+        /*#timerControls button {*/
+        /*    width: 80px;*/
+        /*}*/
+        /*table {*/
+        /*    float: left;*/
+        /*}*/
+        /*#timerSize {*/
+        /*    float: left;*/
+        /*    margin: 0 40px;*/
+        /*}*/
+        /*#toiletSize {*/
+        /*    float: left;*/
+        /*    margin: 0 40px;*/
+        /*}*/
+        /*#toiletLabel {*/
+        /*    text-align: center;*/
+        /*}*/
+        /*#toiletToggle {*/
+        /*    text-align: right;*/
+        /*    display: block;*/
+        /*}*/
+        /*#timerRead {*/
+        /*    margin: 0 0 10px 0;*/
+        /*}*/
+        /*#readLabel {*/
+        /*    font-size: 1.5em;*/
+        /*}*/
+        /*h4 {*/
+        /*    margin: 5px;*/
+        /*}*/
+        /*#addTimePane {*/
+        /*    padding: 5px;*/
+        /*    border: 1px solid black;*/
+        /*    display: inline-block;*/
+        /*    position: absolute;*/
+        /*    background-color: white;*/
+        /*}*/
+        /*#addTimePane input {*/
+        /*    width: 50px;*/
+        /*}*/
     </style>
 </head>
+
 <body>
 
-<div id="timers">
-    <h1 id="timerMain">00:00:00</h1>
-    <h1 id="timerRead">00:00:00</h1>
-    <span id="readLabel">Einlesezeit</span>
-</div>
+    <div id="timers">
+        <h1 id="timerMain">00:00:00</h1>
+        <h1 id="timerRead">00:00:00</h1>
+        <span id="readLabel">Einlesezeit</span>
+    </div><br>
 
-<div id="toilet">
-    <h2>Toilette:</h2>
-    <h2 id="toiletLabel">frei</h2>
-    <a href="#" onclick="return toggleToilet()" id="toiletToggle">Toggle</a>
-</div>
+    <div id="toilet" onclick="toggleToilet()">
+        <h2 id="toiletCaption">Toilette:</h2>
+        <h2 id="toiletLabel">frei</h2>
 
-<div id="settingsWrapper">
-<div id="settings">
-    <table>
-        <tr>
-            <th>Timer</th>
-            <th>Duration</th>
-            <th>Show?</th>
-        </tr>
-        <tr>
-            <td>Main Timer</td>
-            <td>
-                <input type="number" id="mainHrs" value="0" min="0">
-                <input type="number" id="mainMin" value="0" min="0" max="60">
-                <input type="number" id="mainSec" value="0" min="0" max="60">
-            </td>
-            <td>
-                <button onclick="showAddTimePane(this)">Add Time</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Read-Timer</td>
-            <td>
-                <input type="number" id="readHrs" value="0" min="0">
-                <input type="number" id="readMin" value="0" min="0" max="60">
-                <input type="number" id="readSec" value="0" min="0" max="60">
-            </td>
-            <td>
-                <input type="checkbox" id="readEnabled" checked="checked" onclick="toggleReadTimer()">
-            </td>
-        </tr>
-    </table>
+    </div><br>
 
-    <div id="timerControls">
-        <button onclick="startTimer()">Start</button>
-        <br>
-        <button onclick="timer.stop()">Stop</button>
-        <br>
-        <button onclick="resetTimer()">Reset</button>
+    <div id="infos">
+    <h2 id="infoCaption">Informationen:</h2>
+    <div id="infoContent">Blindtext
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+<br>
+Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+<br>
+Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer </div>
+
+
+
     </div>
 
-    <div id="timerSize">
-        <h4>Timer Font-Size</h4>
-        <button onclick="incSize('#timerMain');incSize('#timerRead')">+</button>
-        <button onclick="decSize('#timerMain');decSize('#timerRead')">-</button>
+
+    <div id="settings">
+        <div id="settingsTable">
+        <table >
+            <tr>
+                <th>Show?</th>
+                <th>Timer</th>
+                <th>Duration</th>
+                <td><button onclick="magicFix(false,startTimer,true)">Start</button></td>
+
+            </tr>
+            <tr>
+                <td>
+
+                </td>
+                <td>Main Timer</td>
+                <td id="formMain">
+                    <input type="number" id="mainHrs" value="0" min="0">
+                    <input type="number" id="mainMin" value="0" min="0" max="60">
+                    <input type="number" id="mainSec" value="0" min="0" max="60">
+                </td>
+                <td><button onclick="magicFix(true,timer.stop.bind(timer),false)">Stop</button></td>
+
+            </tr>
+            <tr>
+                <td style="text-align:right">
+                    <input type="checkbox" id="readEnabled" checked="checked" onclick="toggleReadTimer()">
+                </td>
+                <td>Read-Timer</td>
+                <td id="formRead">
+                    <input type="number" id="readHrs" value="0" min="0">
+                    <input type="number" id="readMin" value="0" min="0" max="60">
+                    <input type="number" id="readSec" value="0" min="0" max="60">
+                </td>
+                <td>
+                    <button onclick="magicFix(false,resetTimer,running)">Reset</button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Add time to both</td>
+                <td><input type="number" id="addedHrs" value="0" >
+                    <input type="number" id="addedMin" value="0" min="0" max="60">
+                    <input type="number" id="addedSec" value="0" min="0" max="60"></td>
+                <td><button onclick="addTime()">Add Time</button></td>
+            </tr>
+        </table>
+        </div>
+<br>
+
+            <div id="timerSize">
+                <h4>Timer Font-Size</h4>
+                <button onclick="incSize('#timerMain');incSize('#timerRead')">+</button>
+                <button onclick="decSize('#timerMain');decSize('#timerRead')">-</button>
+            </div>
+
+            <div id="toiletSize">
+                <h4>Toilet Font-Size</h4>
+                <button onclick="incSize('h2')">+</button>
+                <button onclick="decSize('h2')">-</button>
+            </div>
+
+
+
     </div>
 
-    <div id="toiletSize">
-        <h4>Toilet Font-Size</h4>
-        <button onclick="incSize('h2')">+</button>
-        <button onclick="decSize('h2')">-</button>
-    </div>
-</div>
-</div>
 
-<div id="addTimePane" style="display: none">
-    <input type="number" id="addedHrs" value="0" min="0">
-    <input type="number" id="addedMin" value="0" min="0" max="60">
-    <input type="number" id="addedSec" value="0" min="0" max="60"><br>
-    <button onclick="addTime()">Add Time</button>
-    <button onclick="$('#addTimePane').hide()">Close</button>
-</div>
+<div id="toggleSettings" onclick="$('#settings').slideToggle('slow')">Settings</div>
 
 
-<script>
-    var startMillis;
-
-    var maxDurMain,
-        maxDurRead;
-
-    var timer = new interval(50, stepDown);
-
-    function stepDown() {
-        var diff = Date.now() - startMillis;
-
-        $('#timerMain').html(diffToTime(maxDurMain - diff));
-        $('#timerRead').html(diffToTime(maxDurRead - diff));
-    }
 
 
-    function resetTimer() {
-        maxDurMain = (
-            (parseInt($("#mainHrs").val()) * 3600) +
-            (parseInt($("#mainMin").val()) * 60  ) +
-            (parseInt($("#mainSec").val())       )   ) * 1000;
-
-        maxDurRead = (
-            (parseInt($("#readHrs").val()) * 3600) +
-            (parseInt($("#readMin").val()) * 60  ) +
-            (parseInt($("#readSec").val())       )   ) * 1000;
-
-        $('#timerMain').html(diffToTime(maxDurMain));
-        $('#timerRead').html(diffToTime(maxDurRead));
-    }
-
-    function startTimer() {
-        startMillis = Date.now();
-
-        maxDurMain = (
-            (parseInt($("#mainHrs").val()) * 3600) +
-            (parseInt($("#mainMin").val()) * 60  ) +
-            (parseInt($("#mainSec").val())       )   ) * 1000;
-
-        maxDurRead = (
-            (parseInt($("#readHrs").val()) * 3600) +
-            (parseInt($("#readMin").val()) * 60  ) +
-            (parseInt($("#readSec").val())       )   ) * 1000;
 
 
-        timer.run();
-    }
-    
-    function showAddTimePane(elem) {
-        var pane = $("#addTimePane");
+    <script>
 
-        pane.offset($(elem).offset());
-        pane.show();
-    }
+        var startMillis;
+        var running = false;
 
-    function addTime() {
-        addedTime = (
-            (parseInt($("#addedHrs").val()) * 3600) +
-            (parseInt($("#addedMin").val()) * 60  ) +
-            (parseInt($("#addedSec").val())       )   ) * 1000;
+        var maxDurMain,
+            maxDurRead;
 
-        startMillis += addedTime;
+        var timer = new interval(50, stepDown);
 
-        $('#addTimePane').hide();
-    }
+        function stepDown() {
+            var diff = Date.now() - startMillis;
 
-    function diffToTime(diff) {
-        if (diff < 0) {
-            return "00:00:00"
+            $('#timerMain').html(diffToTime(maxDurMain - diff, true));
+            $('#timerRead').html(diffToTime(maxDurRead - diff, false));
         }
 
-        var hrs = Math.floor(diff / 3600000);
-        var min = Math.floor((diff % 3600000) / 60000);
-        var sec = Math.floor((diff % 60000) / 1000);
 
-        return (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
-    }
+        function resetTimer() {
+            timer.stop();
+            maxDurMain = (
+                (parseInt($("#mainHrs").val()) * 3600) +
+                (parseInt($("#mainMin").val()) * 60) +
+                (parseInt($("#mainSec").val()))) * 1000;
 
+            maxDurRead = (
+                (parseInt($("#readHrs").val()) * 3600) +
+                (parseInt($("#readMin").val()) * 60) +
+                (parseInt($("#readSec").val()))) * 1000;
 
-    function toggleReadTimer() {
-        if (!$('#readEnabled')[0].checked) {
-            $('#timerRead').hide();
-            $('#readLabel').hide();
-        } else {
-            $('#timerRead').show();
-            $('#readLabel').show();
+            $('#timerMain').html(diffToTime(maxDurMain, false));
+            $('#timerRead').html(diffToTime(maxDurRead, false));
         }
 
-    }
 
+        function startTimer() {
+            
+        if(!($("#timerMain").html()=="00:00:00")){
+            var maxDurMain = parseDuration("#timerMain")//(
+               // (parseInt($("#mainHrs").val()) * 3600) +
+                //(parseInt($("#mainMin").val()) * 60) +
+                //(parseInt($("#mainSec").val()))) * 1000;
 
-    // https://gist.github.com/manast/1185904
-    function interval(duration, fn) {
-        this.baseline = undefined;
+            var maxDurRead = parseDuration("#timerRead")//(
+                //(parseInt($("#readHrs").val()) * 3600) +
+                //(parseInt($("#readMin").val()) * 60) +
+                //(parseInt($("#readSec").val()))) * 1000;
+            
+            startMillis = Date.now();
+            timer.run();
+        }
+        }
 
-        this.run = function () {
-            if (this.baseline === undefined) {
-                this.baseline = new Date().getTime();
+        function showAddTimePane(elem) {
+            var pane = $("#addTimePane");
+
+            //pane.offset($(elem).offset());
+            pane.show();
+        }
+
+        function addTime() {
+            addedTime = (
+                (parseInt($("#addedHrs").val()) * 3600) +
+                (parseInt($("#addedMin").val()) * 60) +
+                (parseInt($("#addedSec").val()))) * 1000;
+
+            startMillis += addedTime;
+
+           
+        }
+
+        function diffToTime(diff, main) {
+            if (diff < 0) {
+                if (main) magicFix(true, timer.stop.bind(timer), false);
+                return "00:00:00"
             }
-            fn();
-            var end = new Date().getTime();
-            this.baseline += duration;
 
-            var nextTick = duration - (end - this.baseline);
-            if (nextTick < 0) {
-                nextTick = 0
+            var hrs = Math.floor(diff / 3600000);
+            var min = Math.floor((diff % 3600000) / 60000);
+            var sec = Math.floor((diff % 60000) / 1000);
+
+            return (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
+        }
+        
+        function parseDuration(from){
+            var durStr = $(from).html();
+            //alert(durStr);
+            var durArr = durStr.split(":");
+           // alert(durArr);
+           // alert(((parseInt(durArr[0]) * 3600) +
+           //     (parseInt(durArr[1]) * 60) +
+            //    (parseInt(durArr[2]))) * 1000);
+            return (((parseInt(durArr[0]) * 3600) +
+                (parseInt(durArr[1]) * 60) +
+                (parseInt(durArr[2]))) * 1000);
+        }
+
+
+        function toggleReadTimer() {
+            if (!$('#readEnabled')[0].checked) {
+                $('#timerRead').hide();
+                $('#readLabel').hide();
             }
-            (function (i) {
-                i.timer = setTimeout(function () {
-                    i.run(end)
-                }, nextTick)
-            }(this))
-        };
+            else {
+                $('#timerRead').show();
+                $('#readLabel').show();
+            }
 
-        this.stop = function () {
-            clearTimeout(this.timer)
-        }
-    }
-
-
-    function toggleToilet() {
-        if ($('#toiletLabel').html() == "frei") {
-            $('#toiletLabel').html("besetzt")
-        } else {
-            $('#toiletLabel').html("frei")
         }
 
-        return false;
-    }
 
-    function incSize(elem) {
-        var fontSize = parseInt($(elem).css("font-size"));
-        fontSize = (fontSize + 5) + "px";
-        $(elem).css({'font-size': fontSize});
-    }
+        // https://gist.github.com/manast/1185904
+        function interval(duration, fn) {
+            this.baseline = undefined;
 
-    function decSize(elem) {
-        var fontSize = parseInt($(elem).css("font-size"));
-        fontSize = (fontSize - 5) + "px";
-        $(elem).css({'font-size': fontSize});
-    }
-</script>
+            this.run = function() {
+                if (this.baseline === undefined) {
+                    this.baseline = new Date().getTime();
+                }
+                fn();
+                var end = new Date().getTime();
+                this.baseline += duration;
+
+                var nextTick = duration - (end - this.baseline);
+                if (nextTick < 0) {
+                    nextTick = 0
+                }
+                (function(i) {
+                    i.timer = setTimeout(function() {
+                        i.run(end)
+                    }, nextTick)
+                }(this))
+            };
+
+            this.stop = function() {
+                clearTimeout(this.timer)
+            }
+        }
+
+
+        function toggleToilet() {
+            if ($('#toiletLabel').html() == "frei") {
+                $('#toiletLabel').html("besetzt")
+            }
+            else {
+                $('#toiletLabel').html("frei")
+            }
+
+            return false;
+        }
+
+        function incSize(elem) {
+            var fontSize = parseInt($(elem).css("font-size"));
+            fontSize = (fontSize + 5) + "px";
+            $(elem).css({
+                'font-size': fontSize
+            });
+        }
+
+        function decSize(elem) {
+            var fontSize = parseInt($(elem).css("font-size"));
+            fontSize = (fontSize - 5) + "px";
+            $(elem).css({
+                'font-size': fontSize
+            });
+        }
+
+        //Fix, um Start, Stop und Reset zu verbessern
+        function magicFix(RunningState, callback, runningStateAfter) {
+            var report = "running ist " + ((running) ? "true." : "false.") + "\n";
+            report += "Die Funktion soll ausgeführt werden, wenn running gleich " + ((RunningState) ? "true." : "false.") + "\n";
+            if (RunningState == running) {
+                report += "Funktion wird ausgeführt.\n"
+                callback();
+                running = runningStateAfter;
+            }
+            report += "running soll jetzt den Wert " + ((runningStateAfter) ? "true" : "false") + " haben.\n";
+            
+            report += "running hat den Wert " + ((running) ? "true" : "false");
+            //alert(report);
+        }
+        // Funktionen für Frontend-Design
+    </script>
 </body>
+
 </html>
