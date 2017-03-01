@@ -16,6 +16,10 @@
             border-radius: 5px;
         }
         
+        body > div{
+            border: 4px solid black;
+        }
+        
         h1,h2,span,input,
         button {
             padding: 2px;
@@ -44,7 +48,7 @@
         #settings {
             background-color: white;
             display: inline-block;
-            width:90%;
+
             bottom: 0;
             z-index: 3;
         }
@@ -154,33 +158,6 @@
 
 <body>
 
-    <div id="timers">
-        <h1 id="timerMain">00:00:00</h1>
-        <h1 id="timerRead">00:00:00</h1>
-        <span id="readLabel">Einlesezeit</span>
-    </div><br>
-
-    <div id="toilet" onclick="toggleToilet()">
-        <h2 id="toiletCaption">Toilette:</h2>
-        <h2 id="toiletLabel">frei</h2>
-
-    </div><br>
-
-    <div id="infos">
-    <h2 id="infoCaption">Informationen:</h2>
-    <div id="infoContent">Blindtext
-
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-<br>
-Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-<br>
-Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer </div>
-
-
-
-    </div>
-
-
     <div id="settings">
         <div id="settingsTable">
         <table >
@@ -238,9 +215,36 @@ Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim just
 
             <div id="toiletSize">
                 <h4>Toilet Font-Size</h4>
-                <button onclick="incSize('h2')">+</button>
-                <button onclick="decSize('h2')">-</button>
+                <button onclick="incSize('#toiletCaption');incSize('#toiletLabel');">+</button>
+                <button onclick="decSize('#toiletCaption');decSize('#toiletLabel');">-</button>
             </div>
+
+
+
+    </div>
+
+<br>
+    <div id="timers">
+        <h1 id="timerMain">00:00:00</h1>
+        <h1 id="timerRead">00:00:00</h1>
+        <span id="readLabel">Einlesezeit</span>
+    </div><br>
+
+    <div id="toilet" onclick="toggleToilet()">
+        <h2 id="toiletCaption">Toilette:</h2>
+        <h2 id="toiletLabel">frei</h2>
+
+    </div><br>
+
+    <div id="infos">
+    <h2 id="infoCaption">Informationen:</h2>
+    <div id="infoContent"><pre>Blindtext
+
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+
+                       Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+
+Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer </pre></div>
 
 
 
