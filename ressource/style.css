@@ -1,0 +1,128 @@
+
+        @font-face {
+            font-family: alarmClock;
+            src: url('alarmclock.ttf');
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        div {
+            border: 2px solid black;
+            margin: 5px;
+            padding: 1vh;
+            border-top-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+        
+        #settings div{
+            display: inline-block;
+        }
+
+        body > div {
+            border: 4px solid black;
+        }
+
+        h1,
+        h2,
+        span,
+        input,
+        button {
+            padding: 2px;
+        }
+
+        input {
+            width: 20%;
+            min-width: 40px;
+            max-width: 150px;
+        }
+
+        #timerSize,
+        #toiletSize {
+            display: inline-block;
+            background-color: white;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        #timers {
+            display: inline-block;
+        }
+
+        #timerMain,
+        #timerRead {
+            font-family: alarmClock;
+        }
+
+        #settings {
+            display: inline-block;
+            vertical-align: middle;
+            z-index: 2;
+            margin: 200px 0 0 0;
+        }
+
+        #settingsTable {
+            background-color: green;
+            background-color: rgba(100%, 100%, 100%, 1);
+            display: inline-block;
+        }
+
+        #toggleSettings {
+            position: fixed;
+            top: 5px;
+            right: 5px;
+            z-index: 6;
+        }
+
+        #infos {
+            width: 80%;
+            margin: 1vh auto;
+            text-align: left;
+            display: inline-block;
+        }
+
+        #infoCaption {
+            margin: 5px;
+        }
+
+        #toilet {
+            display: inline-block;
+        }
+        
+        #infoFormatted{
+            padding-left: 35px;
+        }
+        .toiletFree {
+            border-color: #31B404;
+            color: #31B404;
+            background-color: #E0F8E0;
+        }
+
+        .toiletOccupied {
+            border-color: #FE2E2E;
+            color: #FE2E2E;
+            background-color: #F6CECE;
+        }
+
+        .overlay {
+            background-color: rgba(100%, 100%, 100%, 0.8);
+            z-index: 2;
+        }
+
+        .wholePage {
+            margin: 0;
+            border: 0;
+            padding: 0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 3;
+            width: 100vw;
+            height: 100vh;
+            text-align: center;
+        }
