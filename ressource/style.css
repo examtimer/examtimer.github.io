@@ -40,8 +40,7 @@
             max-width: 150px;
         }
 
-        #timerSize,
-        #toiletSize {
+        #settings div {
             display: inline-block;
             background-color: white;
         }
@@ -71,13 +70,45 @@
             background-color: rgba(100%, 100%, 100%, 1);
             display: inline-block;
         }
-
-        #toggleSettings {
+        
+        aside{
             position: fixed;
             top: 5px;
             right: 5px;
             z-index: 6;
         }
+        .buttons {
+
+            
+            border-color: lightgrey;
+            color: lightgrey;
+            font-weight: bold;
+        }
+        
+        .buttons:hover{
+            color: white;
+            background-color: lightgrey;
+        }
+        
+        .buttonsmall {
+
+            padding: 5px;
+            margin: 0;
+            border-color: darkgrey;
+            color: darkgrey;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .buttonsmall:hover{
+            color: black;
+            border-color: black;
+        }
+        
+        #settings #settingsTable #addTime, aside #startButton, aside #stopButton{
+            display:none;
+        }
+
 
         #infos {
             width: 80%;

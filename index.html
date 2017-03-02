@@ -17,7 +17,7 @@
                     <th>Timer</th>
                     <th>Duration</th>
                     <td>
-                        <button onclick="magicFix(false,startTimer,true)">Start</button>
+                        <!-- <button onclick="magicFix(false,startTimer,true)">Start</button> -->
                     </td>
 
                 </tr>
@@ -32,7 +32,7 @@
                         <input type="number" id="mainSec" value="0" min="0" max="60">
                     </td>
                     <td>
-                        <button onclick="magicFix(true,timer.stop.bind(timer),false)">Stop</button>
+                      <!--   <button onclick="magicFix(true,timer.stop.bind(timer),false)">Stop</button> -->
                     </td>
 
                 </tr>
@@ -47,7 +47,8 @@
                         <input type="number" id="readSec" value="0" min="0" max="60">
                     </td>
                     <td>
-                        <button onclick="magicFix(false,resetTimer,running)">Reset</button>
+                        <div id="reset" class="buttonsmall" onclick="magicFix(false,resetTimer,running);resetClick();">Reset</button>
+                       <!--  <button onclick="magicFix(false,resetTimer,running)">Reset</button> -->
                     </td>
                 </tr>
                 <tr>
@@ -57,7 +58,8 @@
                         <input type="number" id="addedMin" value="0" min="0" max="60">
                         <input type="number" id="addedSec" value="0" min="0" max="60"></td>
                     <td>
-                        <button onclick="addTime()">Add Time</button>
+                        <div id="addTime" class="buttonsmall" onclick="addTime()">Add Time</button>
+                    <!--    <button onclick="addTime()">Add Time</button> -->
                     </td>
                 </tr>
             </table>
@@ -87,8 +89,9 @@
             <button onclick="decInfo()">-</button>
         </div>
 <br>
-
+<div><h4>Infotext</h4>
         <textarea id="infoContent" oninput="this.editor.update()" cols="60" rows="10">
+            
 ## Information
 
 This can parse **MarkDown**.
@@ -100,7 +103,7 @@ This can parse **MarkDown**.
 
 [Wikipedia](https://en.wikipedia.org/wiki/Markdown)
         </textarea>
-
+</div>
     </div>
 </div>
 <br>
@@ -122,10 +125,17 @@ This can parse **MarkDown**.
     </div>
 </div>
 
-
-<div id="toggleSettings" onclick="toggleSettingsOverlay()">
+<aside>
+<div class="buttons" id="toggleSettings" onclick="toggleSettingsOverlay()">
     Settings
 </div>
+<div class="buttons" id="startButton" onclick="magicFix(false,startTimer,true);startClick()">
+    Start
+</div>
+<div class="buttons" id="stopButton" onclick="magicFix(true,timer.stop.bind(timer),false);stopClick()">
+    Stop
+</div>
+</aside>
 
 
 <script>
