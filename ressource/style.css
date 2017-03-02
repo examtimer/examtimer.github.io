@@ -57,6 +57,16 @@
         #timerRead {
             font-family: alarmClock;
         }
+        #timerRead{
+            font-size:20px;
+            margin-bottom:0;
+            padding-bottom:0;
+        }
+        
+        #readLabel{
+            margin-top:0;
+            padding-top:0;
+        }
 
         #settings {
             display: inline-block;
