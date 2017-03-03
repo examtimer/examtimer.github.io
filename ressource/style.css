@@ -116,7 +116,7 @@ aside {
     color: grey;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    background-color: black;
+    
 }
 
 .buttonsmall:hover {
@@ -186,9 +186,9 @@ aside #stopButton {
     width: 200px;
     /*box-sizing: border-box;*/
     margin: 0;
-    border-bottom-right-radius: 15px;
+     /* border-bottom-right-radius: 15px;
     border-top-left-radius: 15px;
     border-top-right-radius: 0;
-    border-bottom-left-radius: 0;
+    border-bottom-left-radius: 0;*/
     background-color: white;
 }

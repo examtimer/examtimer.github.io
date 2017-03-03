@@ -31,10 +31,10 @@
                         <input type="number" id="mainMin" value="0" min="0" max="60" onchange="mainTimerChange()">
                         <input type="number" id="mainSec" value="0" min="0" max="60" onchange="mainTimerChange()">
                     </td>
-                    <td>
-                           <div class="buttonsmall" id="startButton" onclick="magicFix(false,startTimer,true);startClick()">
+                    <td><div class="buttonsmall startButton" onclick="magicFix(false,startTimer,true);startClick()">
         Start
-    </div></td>
+    </div>
+                           </td>
                    
                         
 
@@ -49,6 +49,10 @@
                         <input type="number" id="readMin" value="0" min="0" max="60" onchange="readTimerChange()">
                         <input type="number" id="readSec" value="0" min="0" max="60" onchange="readTimerChange()">
                     </td>
+                      <td><div style="visibility:hidden; height:1px" class="buttonsmall" >
+        Start
+    </div>
+                           </td>
                     <!-- <td>
                          <div id="reset" class="buttonsmall" onclick="magicFix(false,resetTimer,running);resetClick();">
                              Reset
@@ -136,7 +140,9 @@ This can parse **MarkDown**.
     <div class="buttons" id="toggleSettings" onclick="toggleSettingsOverlay()">
         Settings
     </div>
-
+<div class="buttons startButton" id="startButton" onclick="magicFix(false,startTimer,true);startClick()">
+        Start
+    </div>
     <div class="buttons" id="stopButton" onclick="magicFix(true,resetTimer,false);stopClick()">
         Stop / Reset
     </div>
