@@ -16,9 +16,9 @@
                     <th>Show?</th>
                     <th>Timer</th>
                     <th>Duration</th>
-                    <td>
-                        <!-- <button onclick="magicFix(false,startTimer,true)">Start</button> -->
-                    </td>
+                    <!--<td>
+                         <button onclick="magicFix(false,startTimer,true)">Start</button>
+                    </td>-->
 
                 </tr>
                 <tr>
@@ -27,13 +27,13 @@
                     </td>
                     <td>Main Timer</td>
                     <td id="formMain">
-                        <input type="number" id="mainHrs" value="0" min="0">
-                        <input type="number" id="mainMin" value="0" min="0" max="60">
-                        <input type="number" id="mainSec" value="0" min="0" max="60">
+                        <input type="number" id="mainHrs" value="0" min="0" onchange="mainTimerChange()">
+                        <input type="number" id="mainMin" value="0" min="0" max="60" onchange="mainTimerChange()">
+                        <input type="number" id="mainSec" value="0" min="0" max="60" onchange="mainTimerChange()">
                     </td>
-                    <td>
-                      <!--   <button onclick="magicFix(true,timer.stop.bind(timer),false)">Stop</button> -->
-                    </td>
+                    <!--<td>
+                           <button onclick="magicFix(true,timer.stop.bind(timer),false)">Stop</button>
+                    </td>-->
 
                 </tr>
                 <tr>
@@ -42,16 +42,18 @@
                     </td>
                     <td>Read-Timer</td>
                     <td id="formRead">
-                        <input type="number" id="readHrs" value="0" min="0">
-                        <input type="number" id="readMin" value="0" min="0" max="60">
-                        <input type="number" id="readSec" value="0" min="0" max="60">
+                        <input type="number" id="readHrs" value="0" min="0" onchange="readTimerChange()">
+                        <input type="number" id="readMin" value="0" min="0" max="60" onchange="readTimerChange()">
+                        <input type="number" id="readSec" value="0" min="0" max="60" onchange="readTimerChange()">
                     </td>
-                    <td>
-                        <div id="reset" class="buttonsmall" onclick="magicFix(false,resetTimer,running);resetClick();">Reset</div>
-                       <!--  <button onclick="magicFix(false,resetTimer,running)">Reset</button> -->
-                    </td>
+                    <!-- <td>
+                         <div id="reset" class="buttonsmall" onclick="magicFix(false,resetTimer,running);resetClick();">
+                             Reset
+                         </div>
+                           <button onclick="magicFix(false,resetTimer,running)">Reset</button>
+                     </td>-->
                 </tr>
-                <tr>
+                <!--<tr>
                     <td></td>
                     <td>Add time to both</td>
                     <td><input type="number" id="addedHrs" value="0">
@@ -59,9 +61,9 @@
                         <input type="number" id="addedSec" value="0" min="0" max="60"></td>
                     <td>
                         <div id="addTime" class="buttonsmall" onclick="addTime()">Add Time</div>
-                    <!--    <button onclick="addTime()">Add Time</button> -->
+                        &lt;!&ndash;    <button onclick="addTime()">Add Time</button> &ndash;&gt;
                     </td>
-                </tr>
+                </tr>-->
             </table>
         </div>
 
@@ -78,19 +80,19 @@
             <button onclick="incSize('#toiletCaption');incSize('#toiletLabel');">+</button>
             <button onclick="decSize('#toiletCaption');decSize('#toiletLabel');">-</button>
         </div>
-                <div id="marginSize">
+        <!--<div id="marginSize">
             <h4>Space between blocks</h4>
             <button onclick="incMargin()">+</button>
             <button onclick="decMargin()">-</button>
-        </div>
-                        <div id="infoSize">
+        </div>-->
+        <div id="infoSize">
             <h4>Info Font-Size</h4>
             <button onclick="incInfo()">+</button>
             <button onclick="decInfo()">-</button>
         </div>
-<br>
-<div><h4>Infotext</h4>
-        <textarea id="infoContent" oninput="this.editor.update()" cols="60" rows="10">
+        <br>
+        <div><h4>Infotext</h4>
+            <textarea id="infoContent" oninput="this.editor.update()" cols="60" rows="10">
             
 ## Information
 
@@ -103,39 +105,51 @@ This can parse **MarkDown**.
 
 [Wikipedia](https://en.wikipedia.org/wiki/Markdown)
         </textarea>
-</div>
+        </div>
     </div>
 </div>
 <br>
-<div id="timers">
-    <h1 id="timerMain">00:00:00</h1>
-    <h1 id="timerRead">00:00:00</h1>
-    <span id="readLabel">Einlesezeit</span>
-</div>
-<br>
-<div id="toilet" class="toiletFree" onclick="toggleToilet()">
-    <h2 id="toiletCaption">Toilette:</h2>
-    <h2 id="toiletLabel">frei</h2>
+<main class="centerWrapper">
+    <div id="timers">
+        <h1 id="timerMain">00:00:00</h1>
+        <h1 id="timerRead">00:00:00</h1>
+        <span id="readLabel">Einlesezeit</span>
+    </div>
+    <div id="toilet" class="toiletFree" onclick="toggleToilet()">
+        <h2 id="toiletCaption">Toilette:</h2>
+        <h2 id="toiletLabel">frei</h2>
 
-</div>
-<br>
+    </div>
+</main>
+
 <div id="infos">
     <h2 id="infoCaption">Informationen:</h2>
     <div id="infoFormatted">
     </div>
 </div>
 
+
 <aside>
-<div class="buttons" id="toggleSettings" onclick="toggleSettingsOverlay()">
-    Settings
-</div>
-<div class="buttons" id="startButton" onclick="magicFix(false,startTimer,true);startClick()">
-    Start
-</div>
-<div class="buttons" id="stopButton" onclick="magicFix(true,timer.stop.bind(timer),false);stopClick()">
-    Stop
-</div>
+    <div class="buttons" id="toggleSettings" onclick="toggleSettingsOverlay()">
+        Settings
+    </div>
+    <div class="buttons" id="startButton" onclick="magicFix(false,startTimer,true);startClick()">
+        Start
+    </div>
+    <div class="buttons" id="stopButton" onclick="magicFix(true,resetTimer,false);stopClick()">
+        Stop / Reset
+    </div>
+    <div class="buttons" id="addTimeToggle" onclick="toggleAddTime(this)" style="display: none">
+        Add Time
+    </div>
 </aside>
+
+<div id="addTimePane" style="display: none">
+    <input type="number" id="addedHrs" value="0">
+    <input type="number" id="addedMin" value="0" min="0" max="60">
+    <input type="number" id="addedSec" value="0" min="0" max="60">
+    <div id="addTime" class="buttonsmall" onclick="addTime()">Add Time</div>
+</div>
 
 
 <script>
