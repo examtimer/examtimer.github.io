@@ -80,9 +80,14 @@ body {
 }
 
 #settingsTable {
-    background-color: green;
+    /*background-color: green;*/
     background-color: rgba(100%, 100%, 100%, 1);
     display: inline-block;
+}
+
+#jumpFix {
+    width: 45px;
+    border: none;
 }
 
 aside {
