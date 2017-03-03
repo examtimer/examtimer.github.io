@@ -1,0 +1,194 @@
+@font-face {
+    font-family: alarmClock;
+    src: url('alarmclock.ttf');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+div {
+    border: 2px solid black;
+    margin: 5px;
+    padding: 1vh;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#settings div {
+    display: inline-block;
+}
+
+body>div,
+#timers,
+#toilet{
+    border: 4px solid ;
+}
+
+h1,
+h2,
+span,
+input,
+button {
+    padding: 2px;
+}
+
+input {
+    width: 20%;
+    min-width: 40px;
+    max-width: 150px;
+}
+
+#settings div {
+    display: inline-block;
+    background-color: white;
+}
+
+body {
+    text-align: center;
+}
+
+#timers {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#timerMain,
+#timerRead {
+    font-family: alarmClock;
+}
+
+#timerRead {
+    font-size: 20px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+#readLabel {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#settings {
+    display: inline-block;
+    vertical-align: middle;
+    z-index: 2;
+    margin: 200px 0 0 0;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+#settingsTable {
+    background-color: green;
+    background-color: rgba(100%, 100%, 100%, 1);
+    display: inline-block;
+}
+
+aside {
+    position: fixed;
+    top: 5px;
+    right: 5px;
+    z-index: 6;
+}
+
+.buttons {
+    border-color: lightgrey;
+    color: lightgrey;
+    font-weight: bold;
+    width: 120px;
+    /*box-sizing: border-box;*/
+}
+
+.buttons:hover,
+.buttonactive {
+    color: white;
+    background-color: lightgrey;
+    border-color: lightgrey;
+    font-weight: bold;
+    width: 120px;
+}
+
+.buttonsmall {
+    padding: 5px;
+    margin: 0;
+    border-color: grey;
+    color: grey;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: black;
+}
+
+.buttonsmall:hover {
+    color: black;
+    border-color: black;
+}
+
+#settings #settingsTable #addTime,
+aside #startButton,
+aside #stopButton {
+    display: none;
+}
+
+#infos {
+    width: 80%;
+    margin: 1vh auto;
+    text-align: left;
+    display: inline-block;
+}
+
+#infoCaption {
+    margin: 5px;
+}
+
+#toilet {
+    display: inline-block;
+    height: 100%;
+    vertical-align: text-bottom;
+}
+
+#infoFormatted {
+    padding-left: 35px;
+}
+
+.toiletFree {
+    border-color: #31B404;
+    color: #31B404;
+    background-color: #E0F8E0;
+}
+
+.toiletOccupied {
+    border-color: #FE2E2E;
+    color: #FE2E2E;
+    background-color: #F6CECE;
+}
+
+.overlay {
+    background-color: rgba(100%, 100%, 100%, 0.8);
+    z-index: 2;
+}
+
+.wholePage {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+}
+
+#addTimePane {
+    position: absolute;
+    width: 200px;
+    /*box-sizing: border-box;*/
+    margin: 0;
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    background-color: white;
+}

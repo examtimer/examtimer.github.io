@@ -1,321 +1,166 @@
+<!DOCTYPE html>
 <html>
+
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <style type="text/css">
-        body {
-            padding: 1vw 1vh;
-        }
-
-        td input {
-            width: 50px;
-        }
-
-        td {
-            padding: 0px 5px;
-        }
-
-        #timers {
-            float: left;
-        }
-
-        #toilet {
-            float: right;
-            border: 1px solid black;
-            padding: 10px;
-        }
-
-        #settings {
-            position: absolute;
-            bottom: 1vh;
-            left: 1vw;
-        }
-
-        #timerControls {
-            float: left;
-            margin: 0 40px;
-        }
-
-        #timerControls button {
-            width: 80px;
-        }
-
-        table {
-            float: left;
-        }
-
-        #timerSize {
-            float: left;
-            margin: 0 40px;
-        }
-
-        #toiletSize {
-            float: left;
-            margin: 0 40px;
-        }
-
-        #toiletLabel {
-            text-align: center;
-        }
-
-        #toiletToggle {
-            text-align: right;
-            display: block;
-        }
-
-        h1 {
-            margin: 0 0 30px 0;
-        }
-
-        #timerRead {
-            margin: 0 0 10px 0;
-        }
-
-        #readLabel {
-            font-size: 1.5em;
-        }
-
-        h2 {
-            margin: 10px;
-        }
-
-        h4 {
-            margin: 5px;
-        }
-
-        #addTimePane {
-            padding: 5px;
-            border: 1px solid black;
-            display: inline-block;
-            position: absolute;
-            background-color: white;
-        }
-
-        #addTimePane input {
-            width: 50px;
-        }
-
-
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="ressource/style.css">
 </head>
+
 <body>
+<div class="overlay wholePage" onclick="toggleSettingsOverlay()" style="display: none;"></div>
+<div class="wholePage" style="display: none">
+    <div id="settings">
+        <div id="settingsTable">
+            <table>
+                <tr>
+                    <th>Show?</th>
+                    <th>Timer</th>
+                    <th>Duration</th>
+                    <!--<td>
+                         <button onclick="magicFix(false,startTimer,true)">Start</button>
+                    </td>-->
 
-<div id="timers">
-    <h1 id="timerMain">00:00:00</h1>
-    <h1 id="timerRead">00:00:00</h1>
-    <span id="readLabel">Einlesezeit</span>
-</div>
+                </tr>
+                <tr>
+                    <td>
 
-<div id="toilet">
-    <h2>Toilette:</h2>
-    <h2 id="toiletLabel">frei</h2>
-    <a href="." onclick="return toggleToilet()" id="toiletToggle">Toggle</a>
-</div>
+                    </td>
+                    <td>Main Timer</td>
+                    <td id="formMain">
+                        <input type="number" id="mainHrs" value="0" min="0" onchange="mainTimerChange()">
+                        <input type="number" id="mainMin" value="0" min="0" max="60" onchange="mainTimerChange()">
+                        <input type="number" id="mainSec" value="0" min="0" max="60" onchange="mainTimerChange()">
+                    </td>
+                    <td>
+                           <div class="buttonsmall" id="startButton" onclick="magicFix(false,startTimer,true);startClick()">
+        Start
+    </div></td>
+                   
+                        
 
+                </tr>
+                <tr>
+                    <td style="text-align:right">
+                        <input type="checkbox" id="readEnabled" checked="checked" onclick="toggleReadTimer()">
+                    </td>
+                    <td>Read-Timer</td>
+                    <td id="formRead">
+                        <input type="number" id="readHrs" value="0" min="0" onchange="readTimerChange()">
+                        <input type="number" id="readMin" value="0" min="0" max="60" onchange="readTimerChange()">
+                        <input type="number" id="readSec" value="0" min="0" max="60" onchange="readTimerChange()">
+                    </td>
+                    <!-- <td>
+                         <div id="reset" class="buttonsmall" onclick="magicFix(false,resetTimer,running);resetClick();">
+                             Reset
+                         </div>
+                           <button onclick="magicFix(false,resetTimer,running)">Reset</button>
+                     </td>-->
+                </tr>
+                <!--<tr>
+                    <td></td>
+                    <td>Add time to both</td>
+                    <td><input type="number" id="addedHrs" value="0">
+                        <input type="number" id="addedMin" value="0" min="0" max="60">
+                        <input type="number" id="addedSec" value="0" min="0" max="60"></td>
+                    <td>
+                        <div id="addTime" class="buttonsmall" onclick="addTime()">Add Time</div>
+                        &lt;!&ndash;    <button onclick="addTime()">Add Time</button> &ndash;&gt;
+                    </td>
+                </tr>-->
+            </table>
+        </div>
 
-<div id="settings">
-    <table>
-        <tr>
-            <th>Timer</th>
-            <th>Duration</th>
-            <th>Show?</th>
-        </tr>
-        <tr>
-            <td>Main Timer</td>
-            <td>
-                <input type="number" id="mainHrs" value="0" min="0">
-                <input type="number" id="mainMin" value="0" min="0" max="60">
-                <input type="number" id="mainSec" value="0" min="0" max="60">
-            </td>
-            <td>
-                <button onclick="showAddTimePane(this)">Add Time</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Read-Timer</td>
-            <td>
-                <input type="number" id="readHrs" value="0" min="0">
-                <input type="number" id="readMin" value="0" min="0" max="60">
-                <input type="number" id="readSec" value="0" min="0" max="60">
-            </td>
-            <td>
-                <input type="checkbox" id="readEnabled" checked="checked" onclick="toggleReadTimer()">
-            </td>
-        </tr>
-    </table>
-
-    <div id="timerControls">
-        <button onclick="startTimer()">Start</button>
         <br>
-        <button onclick="timer.stop()">Stop</button>
+
+        <div id="timerSize">
+            <h4>Timer Font-Size</h4>
+            <button onclick="incSize('#timerMain',7);incSize('#timerRead');incSize('#readLabel', 1)">+</button>
+            <button onclick="decSize('#timerMain',7);decSize('#timerRead');decSize('#readLabel', 1)">-</button>
+        </div>
+
+        <div id="toiletSize">
+            <h4>Toilet Font-Size</h4>
+            <button onclick="incSize('#toiletCaption');incSize('#toiletLabel');">+</button>
+            <button onclick="decSize('#toiletCaption');decSize('#toiletLabel');">-</button>
+        </div>
+        <!--<div id="marginSize">
+            <h4>Space between blocks</h4>
+            <button onclick="incMargin()">+</button>
+            <button onclick="decMargin()">-</button>
+        </div>-->
+        <div id="infoSize">
+            <h4>Info Font-Size</h4>
+            <button onclick="incInfo()">+</button>
+            <button onclick="decInfo()">-</button>
+        </div>
         <br>
-        <button onclick="resetTimer()">Reset</button>
-    </div>
+        <div><h4>Infotext</h4>
+            <textarea id="infoContent" oninput="this.editor.update()" cols="60" rows="10">
+            
+## Information
 
-    <div id="timerSize">
-        <h4>Timer Font-Size</h4>
-        <button onclick="incSize('h1')">+</button>
-        <button onclick="decSize('h1')">-</button>
-    </div>
+This can parse **MarkDown**.
 
-    <div id="toiletSize">
-        <h4>Toilet Font-Size</h4>
-        <button onclick="incSize('h2')">+</button>
-        <button onclick="decSize('h2')">-</button>
+* This
+* is
+* a
+* list
+
+[Wikipedia](https://en.wikipedia.org/wiki/Markdown)
+        </textarea>
+        </div>
+    </div>
+</div>
+<br>
+<main class="centerWrapper">
+    <div id="timers">
+        <h1 id="timerMain">00:00:00</h1>
+        <h1 id="timerRead">00:00:00</h1>
+        <span id="readLabel">Einlesezeit</span>
+    </div>
+    <div id="toilet" class="toiletFree" onclick="toggleToilet()">
+        <h2 id="toiletCaption">Toilette:</h2>
+        <h2 id="toiletLabel">frei</h2>
+
+    </div>
+</main>
+
+<div id="infos">
+    <h2 id="infoCaption">Informationen:</h2>
+    <div id="infoFormatted">
     </div>
 </div>
 
+
+<aside>
+    <div class="buttons" id="toggleSettings" onclick="toggleSettingsOverlay()">
+        Settings
+    </div>
+
+    <div class="buttons" id="stopButton" onclick="magicFix(true,resetTimer,false);stopClick()">
+        Stop / Reset
+    </div>
+    <div class="buttons" id="addTimeToggle" onclick="toggleAddTime(this)" style="display: none">
+        Add Time
+    </div>
+</aside>
 
 <div id="addTimePane" style="display: none">
-    <input type="number" id="addedHrs" value="0" min="0">
+    <input type="number" id="addedHrs" value="0">
     <input type="number" id="addedMin" value="0" min="0" max="60">
-    <input type="number" id="addedSec" value="0" min="0" max="60"><br>
-    <button onclick="addTime()">Add Time</button>
-    <button onclick="$('#addTimePane').hide()">Close</button>
+    <input type="number" id="addedSec" value="0" min="0" max="60">
+    <div id="addTime" class="buttonsmall" onclick="addTime()">Add Time</div>
 </div>
 
 
 <script>
-    var startMillis;
-
-    var maxDurMain,
-        maxDurRead;
-
-    var timer = new interval(50, stepDown);
-
-    function stepDown() {
-        var diff = Date.now() - startMillis;
-
-        $('#timerMain').html(diffToTime(maxDurMain - diff));
-        $('#timerRead').html(diffToTime(maxDurRead - diff));
-    }
 
 
-    function resetTimer() {
-        maxDurMain = (
-            (parseInt($("#mainHrs").val()) * 3600) +
-            (parseInt($("#mainMin").val()) * 60  ) +
-            (parseInt($("#mainSec").val())       )   ) * 1000;
+    var exports = {};
 
-        maxDurRead = (
-            (parseInt($("#readHrs").val()) * 3600) +
-            (parseInt($("#readMin").val()) * 60  ) +
-            (parseInt($("#readSec").val())       )   ) * 1000;
-
-        $('#timerMain').html(diffToTime(maxDurMain));
-        $('#timerRead').html(diffToTime(maxDurRead));
-    }
-
-    function startTimer() {
-        startMillis = Date.now();
-
-        maxDurMain = (
-            (parseInt($("#mainHrs").val()) * 3600) +
-            (parseInt($("#mainMin").val()) * 60  ) +
-            (parseInt($("#mainSec").val())       )   ) * 1000;
-
-        maxDurRead = (
-            (parseInt($("#readHrs").val()) * 3600) +
-            (parseInt($("#readMin").val()) * 60  ) +
-            (parseInt($("#readSec").val())       )   ) * 1000;
-
-
-        timer.run();
-    }
-    
-    function showAddTimePane(elem) {
-        var pane = $("#addTimePane");
-
-        pane.offset($(elem).offset());
-        pane.show();
-    }
-
-    function addTime() {
-        addedTime = (
-            (parseInt($("#addedHrs").val()) * 3600) +
-            (parseInt($("#addedMin").val()) * 60  ) +
-            (parseInt($("#addedSec").val())       )   ) * 1000;
-
-        startMillis += addedTime;
-
-        $('#addTimePane').hide();
-    }
-
-    function diffToTime(diff) {
-        if (diff < 0) {
-            return "00:00:00"
-        }
-
-        var hrs = Math.floor(diff / 3600000);
-        var min = Math.floor((diff % 3600000) / 60000);
-        var sec = Math.floor((diff % 60000) / 1000);
-
-        return (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min) + ":" + (sec < 10 ? "0" + sec : sec);
-    }
-
-
-    function toggleReadTimer() {
-        if (!$('#readEnabled')[0].checked) {
-            $('#timerRead').hide();
-            $('#readLabel').hide();
-        } else {
-            $('#timerRead').show();
-            $('#readLabel').show();
-        }
-
-    }
-
-
-    // https://gist.github.com/manast/1185904
-    function interval(duration, fn) {
-        this.baseline = undefined;
-
-        this.run = function () {
-            if (this.baseline === undefined) {
-                this.baseline = new Date().getTime();
-            }
-            fn();
-            var end = new Date().getTime();
-            this.baseline += duration;
-
-            var nextTick = duration - (end - this.baseline);
-            if (nextTick < 0) {
-                nextTick = 0
-            }
-            (function (i) {
-                i.timer = setTimeout(function () {
-                    i.run(end)
-                }, nextTick)
-            }(this))
-        };
-
-        this.stop = function () {
-            clearTimeout(this.timer)
-        }
-    }
-
-
-    function toggleToilet() {
-        if ($('#toiletLabel').html() == "frei") {
-            $('#toiletLabel').html("besetzt")
-        } else {
-            $('#toiletLabel').html("frei")
-        }
-
-        return false;
-    }
-
-    function incSize(elem) {
-        var fontSize = parseInt($(elem).css("font-size"));
-        fontSize = (fontSize + 5) + "px";
-        $(elem).css({'font-size': fontSize});
-    }
-
-    function decSize(elem) {
-        var fontSize = parseInt($(elem).css("font-size"));
-        fontSize = (fontSize - 5) + "px";
-        $(elem).css({'font-size': fontSize});
-    }
 </script>
+<script src="lib/markdown.js"></script>
+<script src="lib/exam.js"></script>
 </body>
+
 </html>

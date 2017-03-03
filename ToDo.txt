@@ -1,0 +1,2 @@
+Was anpassen bei Schriftgrößenanderung?
+	- Rahmen, Padding von #timers anpassen?
