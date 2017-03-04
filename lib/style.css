@@ -9,6 +9,11 @@
     font-family: sans-serif;
 }
 
+body{
+/*weg, falls keine Hintergrundfarben gewünscht*/
+ background-color:   #C8C8C8;
+}
+
 div {
     border: 2px solid black;
     margin: 5px;
@@ -53,6 +58,8 @@ body {
 #timers {
     display: inline-block;
     vertical-align: top;
+    /*weg, falls keine Hintergrundfarben gewünscht*/
+    background-color: #FAFAFA;
 }
 
 #timerMain,
@@ -97,8 +104,9 @@ aside {
 }
 
 .buttons {
-    border-color: lightgrey;
-    color: lightgrey;
+    border-color: darkgrey;
+    color: darkgrey;
+    background-color: white;
     font-weight: bold;
     width: 120px;
 }
@@ -106,8 +114,8 @@ aside {
 .buttons:hover,
 .buttonactive {
     color: white;
-    background-color: lightgrey;
-    border-color: lightgrey;
+    background-color: darkgrey;
+    border-color: darkgrey;
     font-weight: bold;
     width: 120px;
 }
@@ -138,6 +146,8 @@ aside #stopButton {
     margin: 1vh auto;
     text-align: left;
     display: inline-block;
+    /*weg, falls keine Hintergrundfarben gewünscht*/
+    background-color:#E0E0E0;
 }
 
 #infoCaption {
@@ -152,6 +162,8 @@ aside #stopButton {
 
 #infoFormatted {
     padding-left: 35px;
+    /*weg, falls keine Hintergrundfarben gewünscht*/
+    background-color:#FAFAFA;
 }
 
 .toiletFree {
@@ -169,6 +181,7 @@ aside #stopButton {
 .overlay {
     background-color: rgba(100%, 100%, 100%, 0.8);
     z-index: 2;
+    border-radius:0px;
 }
 
 .wholePage {
