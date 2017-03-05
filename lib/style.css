@@ -56,6 +56,7 @@ body {
 }
 
 #timers {
+    position:relative;
     display: inline-block;
     vertical-align: top;
     /*weg, falls keine Hintergrundfarben gewünscht*/
@@ -155,6 +156,7 @@ aside #stopButton {
 }
 
 #toilet {
+position:relative;
     display: inline-block;
     height: 100%;
     vertical-align: text-bottom;

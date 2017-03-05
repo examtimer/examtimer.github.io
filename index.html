@@ -53,7 +53,6 @@
                             Start
                         </div>
                     </td>
-
                 </tr>
 
             </table>
@@ -63,14 +62,14 @@
 
         <div id="timerSize">
             <h4>Timer Font-Size</h4>
-            <button onclick="incSize('#timerMain',7);incSize('#timerRead');incSize('#readLabel', 1)">+</button>
-            <button onclick="decSize('#timerMain',7);decSize('#timerRead');decSize('#readLabel', 1)">-</button>
+            <button onclick="incSize('#timerMain',7);incSize('#timerRead');incSize('#readLabel', 1);adjustToiletSign()">+</button>
+            <button onclick="decSize('#timerMain',7);decSize('#timerRead');decSize('#readLabel', 1);adjustToiletSign()">-</button>
         </div>
 
         <div id="toiletSize">
             <h4>Toilet Font-Size</h4>
-            <button onclick="incSize('#toiletCaption');incSize('#toiletLabel');">+</button>
-            <button onclick="decSize('#toiletCaption');decSize('#toiletLabel');">-</button>
+            <button onclick="incSize('#toiletCaption');incSize('#toiletLabel');adjustToiletSign()">+</button>
+            <button onclick="decSize('#toiletCaption');decSize('#toiletLabel');adjustToiletSign()">-</button>
         </div>
 
         <div id="infoSize">
