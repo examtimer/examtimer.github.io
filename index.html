@@ -17,8 +17,8 @@
             <table>
                 <tr>
                     <th>Show?</th>
-                    <th>Timer</th>
-                    <th>Duration</th>
+                    <th>Element</th>
+                    <th>Value</th>
                     <td>
                         <div id="jumpFix"></div>
                     </td>
@@ -29,9 +29,9 @@
                     </td>
                     <td>Main Timer</td>
                     <td id="formMain">
-                        <input type="number" id="mainHrs" value="0" min="0" onchange="mainTimerChange()">
-                        <input type="number" id="mainMin" value="0" min="0" max="60" onchange="mainTimerChange()">
-                        <input type="number" id="mainSec" value="0" min="0" max="60" onchange="mainTimerChange()">
+                        <input class="timeInput" type="number" id="mainHrs" value="0" min="0" onchange="mainTimerChange()">h
+                        <input class="timeInput" type="number" id="mainMin" value="0" min="0" max="60" onchange="mainTimerChange()">m
+                        <input class="timeInput" type="number" id="mainSec" value="0" min="0" max="60" onchange="mainTimerChange()">s
                     </td>
                     <td rowspan="2">
                         <div class="buttonsmall startButton" onclick="magicFix(false,startTimer,true);startClick()">
@@ -42,14 +42,14 @@
 
                 </tr>
                 <tr>
-                    <td style="text-align:right">
+                    <td>
                         <input type="checkbox" id="readEnabled" checked="checked" onclick="toggleReadTimer()">
                     </td>
                     <td>Read-Timer</td>
                     <td id="formRead">
-                        <input type="number" id="readHrs" value="0" min="0" onchange="readTimerChange()">
-                        <input type="number" id="readMin" value="0" min="0" max="60" onchange="readTimerChange()">
-                        <input type="number" id="readSec" value="0" min="0" max="60" onchange="readTimerChange()">
+                        <input class="timeInput" type="number" id="readHrs" value="0" min="0" onchange="readTimerChange()">h
+                        <input class="timeInput" type="number" id="readMin" value="0" min="0" max="60" onchange="readTimerChange()">m
+                        <input class="timeInput" type="number" id="readSec" value="0" min="0" max="60" onchange="readTimerChange()">s
                     </td>
                     <td>
                         <div style="visibility:hidden; height:1px" class="buttonsmall">
@@ -57,7 +57,16 @@
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="passwordEnabled" checked="checked" onclick="togglePassword()">
+                    </td>
+                    <td>Password</td>
+                    <td id="formPassword">
+                        <input id="password" value="" placeholder="Enter password here" size="40" onkeyup="updatePassword(this)">
+                    </td>
 
+                </tr>
             </table>
         </div>
 
@@ -80,6 +89,11 @@
             <button onclick="incInfo()">+</button>
             <button onclick="decInfo()">-</button>
         </div>
+        <div id="passwordSize">
+            <h4>Password Font-Size</h4>
+            <button onclick="incSize('.passwordBox')">+</button>
+            <button onclick="decSize('.passwordBox')">-</button>
+            </div>
         <br>
         <div><h4>Infotext</h4>
             <textarea id="infoContent" oninput="this.editor.update()" cols="60" rows="10">
@@ -93,6 +107,8 @@ This can parse **MarkDown**.
 * a
 * list
 
+Here is some `code`.
+
 [Wikipedia](https://en.wikipedia.org/wiki/Markdown)
         </textarea>
         </div>
@@ -100,7 +116,9 @@ This can parse **MarkDown**.
         <button onclick="generateStaticLink()">Generate Link from Configuration</button>
     </div>
 </div>
+
 <br>
+
 <main class="centerWrapper">
     <div id="timers">
         <h1 id="timerMain">00:00:00</h1>
@@ -113,6 +131,11 @@ This can parse **MarkDown**.
 
     </div>
 </main>
+
+<div class="passwordBox">
+<span class="passwordLabel">Password:</span>
+<code id="passwordValue">Wird noch bekannt gegeben</code>
+</div>
 
 <div id="infos">
     <h2 id="infoCaption">Informationen:</h2>
@@ -134,6 +157,8 @@ This can parse **MarkDown**.
     <div class="buttons" id="addTimeToggle" onclick="toggleAddTime(this)" style="display: none">
         Add Time
     </div>
+    <div class="buttons" id="updatePasswordBox">
+        <input type="text" id="updatePassword" placeholder="Enter Password" onkeyup="updatePassword(this)">
 </aside>
 
 <div id="addTimePane" style="display: none">
@@ -144,11 +169,9 @@ This can parse **MarkDown**.
 </div>
 
 
+
 <script>
-
-
     var exports = {};
-
 </script>
 <script src="lib/sleep.js"></script>
 <script src="lib/markdown.js"></script>

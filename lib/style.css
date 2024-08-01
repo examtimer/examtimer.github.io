@@ -41,9 +41,15 @@ button {
 }
 
 input {
-    width: 20%;
+width: 60%;
+}
+
+.timeInput {
     min-width: 40px;
     max-width: 150px;
+    width: 20%;
+
+    text-align: right;
 }
 
 #settings div {
@@ -104,6 +110,12 @@ aside {
     z-index: 6;
 }
 
+code {
+    font-family: monospace;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
 .buttons {
     border-color: darkgrey;
     color: darkgrey;
@@ -151,8 +163,25 @@ aside #stopButton {
     background-color: #f7f7ef;
 }
 
+.passwordBox {
+    width: 80%;
+    text-align: center;
+    margin: 1vh auto;
+}
+
 #infoCaption {
     margin: 5px;
+}
+
+div:has(>#infoContent) {
+    width: 90%;
+    min-height: 500px;
+}
+
+#infoContent {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 
 #toilet {
